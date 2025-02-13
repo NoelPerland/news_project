@@ -26,7 +26,7 @@ export default function Home({ news }) {
     <div className="min-h-screen bg-gray-100 text-gray-900">
       {/* Main Content */}
       <main className="container mx-auto p-6">
-        <h2 className="text-xl font-semibold mb-4 text-center">Latest News</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center">Latest News</h2>
         <div className="flex flex-col items-center justify-center">
           {news.length > 0 ? (
             news.map((article) => (
