@@ -6,8 +6,6 @@ export async function getStaticPaths() {
   );
   const data = await result.json();
 
-
-
   if (!Array.isArray(data.results)) {
     console.error("Unexpected API response:", data);
     return { paths: [], fallback: "blocking" };
@@ -22,13 +20,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   try {
-  
     const result = await fetch(
       `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en`
     );
     const data = await result.json();
-
-    
 
     if (!Array.isArray(data.results)) {
       return { notFound: true };
@@ -42,7 +37,7 @@ export async function getStaticProps({ params }) {
 
     return {
       props: { article },
-      revalidate: 60, 
+      revalidate: 60,
     };
   } catch (error) {
     console.error("Error fetching article:", error);
@@ -65,9 +60,6 @@ export default function Article({ article }) {
         <p className="text-lg leading-relaxed text-gray-700">
           {article.description || "No description available."}
         </p>
-        <Link href="/" className="mt-4 text-blue-500 hover:underline">
-          ← Back to Home
-        </Link>
       </div>
     </div>
   );

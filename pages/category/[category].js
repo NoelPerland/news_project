@@ -46,12 +46,6 @@ export default function CategoryPage({ news, category }) {
       <h1 className="text-3xl font-bold mb-4 text-center capitalize">
         {category} News
       </h1>
-      <Link
-        href="/"
-        className="text-blue-500 mb-4 inline-block hover:underline"
-      >
-        ← Back to Home
-      </Link>
 
       <div className="flex flex-col items-center justify-center">
         {news.length > 0 ? (
