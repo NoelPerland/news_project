@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaHome, FaGlobe, FaMicrochip, FaBusinessTime } from "react-icons/fa";
@@ -37,7 +38,8 @@ export default function Header() {
                       : ""
                   }`}
                 >
-                  {category.icon}
+                  {React.cloneElement(category.icon, { className: "w-6 h-6" })}
+
                   {category.name}
                 </Link>
               </li>

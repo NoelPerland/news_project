@@ -32,7 +32,7 @@ export default function Home({ news }) {
             news.map((article) => (
               <div
                 key={article.article_id}
-                className="w-full max-w-3xl p-4 mb-1 bg-white"
+                className="w-full max-w-3xl p-4 mb-3 bg-white"
               >
                 {article.image_url && (
                   <img
