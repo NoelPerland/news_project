@@ -1,22 +1,19 @@
-export async function getStaticPaths() {
-  const categories = [
-    "business",
-    "sports",
-    "entertainment",
-    "technology",
-    "health",
-  ];
+import Link from "next/link";
 
-  let allArticles = [];
-  for (const category of categories) {
-    const result = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en&category=${category}`
-    );
-    const data = await result.json();
-    allArticles = [...allArticles, ...data.results];
+export async function getStaticPaths() {
+  const result = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en`
+  );
+  const data = await result.json();
+
+
+
+  if (!Array.isArray(data.results)) {
+    console.error("Unexpected API response:", data);
+    return { paths: [], fallback: "blocking" };
   }
 
-  const paths = allArticles.map((article) => ({
+  const paths = data.results.map((article) => ({
     params: { articleId: article.article_id },
   }));
 
@@ -24,29 +21,33 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const categories = [
-    "business",
-    "sports",
-    "entertainment",
-    "technology",
-    "health",
-  ];
-
-  let article = null;
-  for (const category of categories) {
+  try {
+  
     const result = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en&category=${category}`
+      `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en`
     );
     const data = await result.json();
 
-    article = data.results.find((a) => a.article_id === params.articleId);
-    if (article) break;
-  }
+    
 
-  return {
-    props: { article },
-    revalidate: 60,
-  };
+    if (!Array.isArray(data.results)) {
+      return { notFound: true };
+    }
+
+    const article = data.results.find((a) => a.article_id === params.articleId);
+
+    if (!article) {
+      return { notFound: true };
+    }
+
+    return {
+      props: { article },
+      revalidate: 60, 
+    };
+  } catch (error) {
+    console.error("Error fetching article:", error);
+    return { notFound: true };
+  }
 }
 
 export default function Article({ article }) {
@@ -62,8 +63,11 @@ export default function Article({ article }) {
           />
         )}
         <p className="text-lg leading-relaxed text-gray-700">
-          {article.description}
+          {article.description || "No description available."}
         </p>
+        <Link href="/" className="mt-4 text-blue-500 hover:underline">
+          ← Back to Home
+        </Link>
       </div>
     </div>
   );
