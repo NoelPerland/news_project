@@ -1,23 +1,25 @@
 import Link from "next/link";
-import { useContext, useState } from "react";
 
-export default function Home() {
-  const articles = [
-    {
-      title: "Breaking News: Noel making a repo 🧑‍💻",
-      summary: "The tech industry is experiencing massive growth...",
-      link: "#",
-    },
-    {
-      title: "NVIDIA stocks keeps on dropping 📉",
-      summary: "New AI models are reshaping industries...",
-      link: "#",
-    },
-    {
-      title: "YE BANNED FROM TWITTER 🚫",
-      summary: "Scientists report that he is racist...",
-      link: "#",
-    },
+export async function getStaticProps() {
+  const result = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en&category=top`
+  );
+  const data = await result.json();
+
+  return {
+    props: { news: data.results || [] }, // Ensure there's always an array
+    revalidate: 60,
+  };
+}
+
+export default function Home({ news }) {
+  const categories = [
+    "world",
+    "technology",
+    "sports",
+    "business",
+    "entertainment",
+    "health",
   ];
 
   return (
@@ -27,46 +29,53 @@ export default function Home() {
         <h1 className="text-2xl font-bold">APPLEBLADET</h1>
         <nav>
           <ul className="flex gap-4">
-            <li>
-              <Link href="#" className="hover:underline">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:underline">
-                World
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:underline">
-                Tech
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:underline">
-                Sports
-              </Link>
-            </li>
+            {categories.map((category) => (
+              <li key={category}>
+                <Link
+                  href={`/category/${category}`}
+                  className="hover:underline capitalize"
+                >
+                  {category}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </header>
 
       {/* Main Content */}
-      <main className="p-6">
-        <h2 className="text-xl font-semibold mb-4">Latest News</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {articles.map((article, index) => (
-            <div key={index} className="card bg-white shadow-lg p-4 rounded-lg">
-              <h3 className="text-lg font-bold">{article.title}</h3>
-              <p className="text-sm text-gray-600">{article.summary}</p>
-              <Link
-                href={article.link}
-                className="text-blue-500 mt-2 inline-block"
+      <main className="container mx-auto p-6">
+        <h2 className="text-xl font-semibold mb-4 text-center">Latest News</h2>
+        <div className="flex flex-col items-center justify-center">
+          {news.length > 0 ? (
+            news.map((article) => (
+              <div
+                key={article.article_id}
+                className="w-full max-w-3xl p-4 border rounded-lg shadow-lg mb-6 bg-white"
               >
-                Read more
-              </Link>
-            </div>
-          ))}
+                {article.image_url && (
+                  <img
+                    src={article.image_url}
+                    alt={article.title}
+                    width={500}
+                    className="object-cover rounded-lg mb-3 mx-auto"
+                  />
+                )}
+                <h3 className="text-lg font-bold">{article.title}</h3>
+                <p className="text-sm text-gray-600">
+                  {article.description || "No description available."}
+                </p>
+                <Link
+                  href={`/article/${article.article_id}`}
+                  className="text-blue-500 mt-2 inline-block hover:underline"
+                >
+                  Read more
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p>No news available at the moment.</p>
+          )}
         </div>
       </main>
 
