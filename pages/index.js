@@ -24,25 +24,6 @@ export default function Home({ news }) {
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
-      {/* Header */}
-      <header className="bg-emerald-600 text-white p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">APPLEBLADET</h1>
-        <nav>
-          <ul className="flex gap-4">
-            {categories.map((category) => (
-              <li key={category}>
-                <Link
-                  href={`/category/${category}`}
-                  className="hover:underline capitalize"
-                >
-                  {category}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
-
       {/* Main Content */}
       <main className="container mx-auto p-6">
         <h2 className="text-xl font-semibold mb-4 text-center">Latest News</h2>
@@ -78,11 +59,6 @@ export default function Home({ news }) {
           )}
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-emerald-900 text-white text-center p-4 mt-6">
-        <p>&copy; 2025 APPLEBLADET. All rights reserved.</p>
-      </footer>
     </div>
   );
 }
