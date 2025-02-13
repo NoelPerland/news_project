@@ -32,7 +32,7 @@ export default function Home({ news }) {
             news.map((article) => (
               <div
                 key={article.article_id}
-                className="w-full max-w-3xl p-4 border rounded-lg shadow-lg mb-6 bg-white"
+                className="w-full max-w-3xl p-4 mb-1 bg-white"
               >
                 {article.image_url && (
                   <img
@@ -42,7 +42,7 @@ export default function Home({ news }) {
                     className="object-cover rounded-lg mb-3 mx-auto"
                   />
                 )}
-                <h3 className="text-lg font-bold">{article.title}</h3>
+                <h3 className="text-2xl font-bold">{article.title}</h3>
                 <p className="text-sm text-gray-600">
                   {article.description || "No description available."}
                 </p>
