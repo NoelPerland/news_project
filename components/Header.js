@@ -5,13 +5,21 @@ import { FaHome, FaGlobe, FaMicrochip, FaFutbol } from "react-icons/fa";
 export default function Header() {
   const router = useRouter();
 
-  const isActive = (pathname) => router.pathname === pathname;
+  const isActive = (pathname) => router.asPath === pathname;
+
+  // Define category links dynamically
+  const categories = [
+    { name: "World", slug: "world", icon: <FaGlobe /> },
+    { name: "Tech", slug: "technology", icon: <FaMicrochip /> },
+    { name: "Sports", slug: "sports", icon: <FaFutbol /> },
+  ];
 
   return (
     <header className="bg-emerald-600 text-white p-4 flex justify-between items-center">
       <h1 className="text-2xl font-bold">APPLEBLADET</h1>
       <nav>
         <ul className="flex gap-4">
+          {/* Home Link */}
           <li>
             <Link
               href="/"
@@ -23,39 +31,21 @@ export default function Header() {
               Home
             </Link>
           </li>
-          <li>
-            <Link
-              href="/world"
-              className={`hover:underline flex items-center gap-2 ${
-                isActive("/world") ? "font-bold" : ""
-              }`}
-            >
-              <FaGlobe />
-              World
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/tech"
-              className={`hover:underline flex items-center gap-2 ${
-                isActive("/tech") ? "font-bold" : ""
-              }`}
-            >
-              <FaMicrochip />
-              Tech
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/sports"
-              className={`hover:underline flex items-center gap-2 ${
-                isActive("/sports") ? "font-bold" : ""
-              }`}
-            >
-              <FaFutbol />
-              Sports
-            </Link>
-          </li>
+
+          {/* Category Links */}
+          {categories.map((category) => (
+            <li key={category.slug}>
+              <Link
+                href={`/category/${category.slug}`}
+                className={`hover:underline flex items-center gap-2 ${
+                  isActive(`/category/${category.slug}`) ? "font-bold" : ""
+                }`}
+              >
+                {category.icon}
+                {category.name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
