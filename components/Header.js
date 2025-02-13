@@ -56,7 +56,7 @@ export default function Header() {
                   isActive("/") ? "font-bold" : ""
                 }`}
               >
-                <FaHome />
+                <FaHome className="w-5 h-5" />
                 Home
               </Link>
             </li>
