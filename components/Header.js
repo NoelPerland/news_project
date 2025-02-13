@@ -4,6 +4,7 @@ import { FaHome, FaGlobe, FaMicrochip, FaBusinessTime } from "react-icons/fa";
 import { IoFitness } from "react-icons/io5";
 import { FaFutbol } from "react-icons/fa6";
 import { TbDeviceDesktopCog } from "react-icons/tb";
+import { IoMdFootball } from "react-icons/io";
 
 export default function Header() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function Header() {
   const categories = [
     { name: "World", slug: "world", icon: <FaGlobe /> },
     { name: "Tech", slug: "technology", icon: <TbDeviceDesktopCog /> },
-    { name: "Sports", slug: "sports", icon: <FaFutbol /> },
+    { name: "Sports", slug: "sports", icon: <IoMdFootball /> },
     { name: "Health", slug: "health", icon: <IoFitness /> },
     { name: "Business", slug: "business", icon: <FaBusinessTime /> },
   ];
@@ -31,7 +32,9 @@ export default function Header() {
                 <Link
                   href={`/category/${category.slug}`}
                   className={`hover:underline flex items-center gap-2 ${
-                    isActive(`/category/${category.slug}`) ? "font-bold" : ""
+                    isActive(`/category/${category.slug}`)
+                      ? "font-bold underline"
+                      : ""
                   }`}
                 >
                   {category.icon}
