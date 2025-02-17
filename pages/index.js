@@ -50,26 +50,23 @@ export default function Home({ news }) {
 
 }
 
-  return (
-    <div className="min-h-screen bg-gray-100 text-gray-900">
-      <main className="container mx-auto p-6">
-        <h2 className="text-3xl font-bold mb-4 text-center">Latest News</h2>
-        <div className="flex flex-col items-center justify-center">
-          {news.length > 0 ? (
-            news.map((article) => (
-              <> 
-              <ArticleCard key={article.article_id} article={article} />
-
-              <button className="pl-4" onClick={() => saveBookmark(article)}>
-              {isBookmarked(article.article_id) ? (
-                <FaBookmark className="text-blue-500" />) : ( <FaRegBookmark /> )} </button> 
-            </>
-            ))
-          ) : (
-            <p>No news available at the moment.</p>
-          )}
-        </div>
-      </main>
+return (
+  <main className="container mx-auto p-6">
+    <h2 className="text-3xl font-bold mb-4 text-center">Latest News</h2>
+    <div className="flex flex-col items-center justify-center">
+      {news.length > 0 ? (
+        news.map((article) => (
+          <ArticleCard
+            key={article.article_id}
+            article={article}
+            saveBookmark={saveBookmark}
+            isBookmarked={isBookmarked}
+          />
+        ))
+      ) : (
+        <p>No news available at the moment.</p>
+      )}
     </div>
-  );
+  </main>
+);
 }
