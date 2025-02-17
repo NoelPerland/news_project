@@ -1,8 +1,6 @@
-import Link from "next/link";
-
 export async function getStaticPaths() {
   const result = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en`
+    `https://newsdata.io/api/1/latest?apikey=${process.env.DIN_API_NYCKEL}&language=en`
   );
   const data = await result.json();
 
@@ -21,7 +19,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   try {
     const result = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en`
+      `https://newsdata.io/api/1/latest?apikey=${process.env.DIN_API_NYCKEL}&language=en`
     );
     const data = await result.json();
 

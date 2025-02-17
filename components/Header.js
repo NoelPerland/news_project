@@ -2,9 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { FaHome, FaGlobe, FaMicrochip, FaBusinessTime } from "react-icons/fa";
+import { FaHome, FaGlobe, FaBusinessTime } from "react-icons/fa";
 import { IoFitness } from "react-icons/io5";
-import { FaFutbol } from "react-icons/fa6";
 import { TbDeviceDesktopCog } from "react-icons/tb";
 import { IoMdFootball } from "react-icons/io";
 
@@ -22,8 +21,12 @@ export default function Header() {
 
   return (
     <div className="grid grid-rows-[auto_1fr] h-22">
+<<<<<<< HEAD
       <header className="bg-emerald-600 text-white p-4 flex justify-between items-center w-full h-20">
         {/* Left Section - Logo */}
+=======
+      <header className="bg-emerald-600 text-white p-4 flex justify-between items-center w-full">
+>>>>>>> 9200ad436c9d20574915e9f653e0b5d75fe6349a
         <div className="flex-1">
           <Link href="/" className="flex items-center gap-2">
             <Image
@@ -35,7 +38,11 @@ export default function Header() {
             />
           </Link>
         </div>
+<<<<<<< HEAD
         {/* Center Section - Category Links */}
+=======
+
+>>>>>>> 9200ad436c9d20574915e9f653e0b5d75fe6349a
         <nav className="flex-1 flex justify-center">
           <ul className="flex gap-12">
             {categories.map((category) => (
@@ -56,7 +63,6 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* Right Section - Home Link */}
         <nav className="flex-1 flex justify-end">
           <ul className="flex gap-12">
             <li>
