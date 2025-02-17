@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ArticleCard({ article }) {
   return (
-    <div className="w-full max-w-3xl p-4 mb-3 bg-white rounded-lg shadow-md relative">
+    <div className="w-full max-w-3xl p-4 mb-3 bg-white rounded-lg shadow-md relative pt-8">
       {article.pubDate && (
         <p className="absolute top-2 right-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-md">
           {new Date(article.pubDate).toLocaleDateString("en-US", {
@@ -12,6 +12,7 @@ export default function ArticleCard({ article }) {
           })}
         </p>
       )}
+
       {article.image_url && (
         <img
           src={article.image_url}
@@ -20,7 +21,9 @@ export default function ArticleCard({ article }) {
           className="object-cover rounded-lg mb-3 mx-auto"
         />
       )}
-      <h3 className="text-2xl font-bold">{article.title}</h3>
+
+      <h3 className="text-2xl font-bold mt-2">{article.title}</h3>
+
       <p className="text-sm text-gray-600">
         {article.description || "No description available."}
       </p>
