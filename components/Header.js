@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { FaHome, FaGlobe, FaBusinessTime } from "react-icons/fa";
+import {
+  FaHome,
+  FaGlobe,
+  FaBusinessTime,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 import { IoFitness } from "react-icons/io5";
 import { TbDeviceDesktopCog } from "react-icons/tb";
 import { IoMdFootball } from "react-icons/io";
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
   const isActive = (pathname) => router.asPath === pathname;
 
@@ -20,9 +27,9 @@ export default function Header() {
   ];
 
   return (
-    <div className="grid grid-rows-[auto_1fr] h-22">
-      <header className="bg-emerald-600 text-white p-4 flex justify-between items-center w-full h-20">
-        {/* Left Section - Logo */}
+    <header className="bg-emerald-600 text-white">
+      <div className="w-full px-4 flex items-center justify-between h-20">
+        {/* Left Section - Logo (No Changes) */}
         <div className="flex-1">
           <Link href="/" className="flex items-center gap-2">
             <Image
@@ -34,7 +41,9 @@ export default function Header() {
             />
           </Link>
         </div>
-        <nav className="flex-1 flex justify-center">
+
+        {/* Center Section - Categories (Hidden on Mobile) */}
+        <nav className="hidden md:flex flex-1 justify-center">
           <ul className="flex gap-12">
             {categories.map((category) => (
               <li key={category.slug}>
@@ -54,7 +63,7 @@ export default function Header() {
           </ul>
         </nav>
 
-        <nav className="flex-1 flex justify-end">
+        <nav className="hidden md:flex flex-1 justify-end">
           <ul className="flex gap-12">
             <li>
               <Link
@@ -69,7 +78,56 @@ export default function Header() {
             </li>
           </ul>
         </nav>
-      </header>
-    </div>
+
+        <div className="md:hidden flex items-center justify-end">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
+            className="text-white"
+          >
+            {menuOpen ? (
+              <FaTimes className="w-6 h-6" />
+            ) : (
+              <FaBars className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <div className="md:hidden absolute top-20 left-0 w-full bg-emerald-600">
+          <ul className="flex flex-col items-center gap-4 p-4">
+            {categories.map((category) => (
+              <li key={category.slug}>
+                <Link
+                  href={`/category/${category.slug}`}
+                  onClick={() => setMenuOpen(false)}
+                  className={`hover:underline flex items-center gap-2 ${
+                    isActive(`/category/${category.slug}`)
+                      ? "font-bold underline"
+                      : ""
+                  }`}
+                >
+                  {React.cloneElement(category.icon, { className: "w-6 h-6" })}
+                  {category.name}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/"
+                onClick={() => setMenuOpen(false)}
+                className={`hover:underline flex items-center gap-2 ${
+                  isActive("/") ? "font-bold" : ""
+                }`}
+              >
+                <FaHome className="w-5 h-5" />
+                Home
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
+    </header>
   );
 }
