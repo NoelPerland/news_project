@@ -29,7 +29,6 @@ export default function Header() {
   return (
     <header className="bg-emerald-600 text-white">
       <div className="w-full px-4 flex items-center justify-between h-20">
-        {/* Left Section - Logo (No Changes) */}
         <div className="flex-1">
           <Link href="/" className="flex items-center gap-2">
             <Image
@@ -42,7 +41,6 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Center Section - Categories (Hidden on Mobile) */}
         <nav className="hidden md:flex flex-1 justify-center">
           <ul className="flex gap-12">
             {categories.map((category) => (
@@ -95,7 +93,7 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-emerald-600">
+        <div className="md:hidden absolute top-20 left-0 w-full bg-emerald-600 z-50">
           <ul className="flex flex-col items-center gap-4 p-4">
             {categories.map((category) => (
               <li key={category.slug}>
