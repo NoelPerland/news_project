@@ -21,12 +21,8 @@ export default function Header() {
 
   return (
     <div className="grid grid-rows-[auto_1fr] h-22">
-<<<<<<< HEAD
       <header className="bg-emerald-600 text-white p-4 flex justify-between items-center w-full h-20">
         {/* Left Section - Logo */}
-=======
-      <header className="bg-emerald-600 text-white p-4 flex justify-between items-center w-full">
->>>>>>> 9200ad436c9d20574915e9f653e0b5d75fe6349a
         <div className="flex-1">
           <Link href="/" className="flex items-center gap-2">
             <Image
@@ -38,11 +34,6 @@ export default function Header() {
             />
           </Link>
         </div>
-<<<<<<< HEAD
-        {/* Center Section - Category Links */}
-=======
-
->>>>>>> 9200ad436c9d20574915e9f653e0b5d75fe6349a
         <nav className="flex-1 flex justify-center">
           <ul className="flex gap-12">
             {categories.map((category) => (
