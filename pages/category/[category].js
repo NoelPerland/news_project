@@ -78,13 +78,11 @@ const saveBookmark = (article) => {
       <div className="flex flex-col items-center justify-center">
         {news.length > 0 ? (
           news.map((article) => (
-            <> 
-            <ArticleCard key={article.article_id} article={article} />
+          
+            <ArticleCard key={article.article_id} article={article} 
+            saveBookmark={saveBookmark}
+            isBookmarked={isBookmarked}/>
 
-            <button className="pl-4" onClick={() => saveBookmark(article)}>
-            {isBookmarked(article.article_id) ? (
-              <FaBookmark className="text-blue-500" />) : ( <FaRegBookmark /> )} </button> 
-              </>
           ))
         ) : (
           <p className="text-gray-500">No news available at the moment.</p>
