@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa"; // Kom ihåg att importera ikoner
+import { FaBookmark, FaRegBookmark } from "react-icons/fa"; 
 
 export default function Bookmarks() { // state-variabel bookmarks för att hålla reda på de bokmärkta artiklarna
   const [bookmarks, setBookmarks] = useState([]);
