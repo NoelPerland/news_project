@@ -22,10 +22,14 @@ export default function Header() {
   return (
     <div className="grid grid-rows-[auto_1fr] h-22">
       <header className="bg-emerald-600 text-white p-4 flex justify-between items-center w-full">
-        <Link href="/" className="text-2xl font-bold hover:underline">
-          APPLEBLADET
-        </Link>
+        {/* Left Section - Logo */}
+        <div className="flex-1">
+          <Link href="/" className="text-2xl font-bold hover:underline">
+            APPLEBLADET
+          </Link>
+        </div>
 
+        {/* Center Section - Category Links */}
         <nav className="flex-1 flex justify-center">
           <ul className="flex gap-12">
             {categories.map((category) => (
@@ -39,7 +43,6 @@ export default function Header() {
                   }`}
                 >
                   {React.cloneElement(category.icon, { className: "w-6 h-6" })}
-
                   {category.name}
                 </Link>
               </li>
@@ -47,7 +50,8 @@ export default function Header() {
           </ul>
         </nav>
 
-        <nav>
+        {/* Right Section - Home Link */}
+        <nav className="flex-1 flex justify-end">
           <ul className="flex gap-12">
             <li>
               <Link

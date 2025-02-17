@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export async function getStaticProps() {
   const result = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${process.env.DIN_API_NYCKEL}&language=en&category=top`
+    `https://newsdata.io/api/1/latest?apikey=${process.env.DIN_API_NYCKEL}&language=en&category=top`
   );
   const data = await result.json();
 
