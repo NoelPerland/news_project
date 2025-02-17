@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { FaHome, FaGlobe, FaMicrochip, FaBusinessTime } from "react-icons/fa";
 import { IoFitness } from "react-icons/io5";
@@ -21,14 +22,19 @@ export default function Header() {
 
   return (
     <div className="grid grid-rows-[auto_1fr] h-22">
-      <header className="bg-emerald-600 text-white p-4 flex justify-between items-center w-full">
+      <header className="bg-emerald-600 text-white p-4 flex justify-between items-center w-full h-20">
         {/* Left Section - Logo */}
         <div className="flex-1">
-          <Link href="/" className="text-2xl font-bold hover:underline">
-            APPLEBLADET
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/images/Apple-LOGO.png"
+              alt="Applebladet Logo"
+              width={190}
+              height={50}
+              priority
+            />
           </Link>
         </div>
-
         {/* Center Section - Category Links */}
         <nav className="flex-1 flex justify-center">
           <ul className="flex gap-12">
