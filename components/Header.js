@@ -12,6 +12,8 @@ import {
 import { IoFitness } from "react-icons/io5";
 import { TbDeviceDesktopCog } from "react-icons/tb";
 import { IoMdFootball } from "react-icons/io";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,8 +64,8 @@ export default function Header() {
         </nav>
 
         <nav className="hidden md:flex flex-1 justify-end">
-          <ul className="flex gap-12">
-            <li>
+          <ul className="flex gap-12 items-center">
+            <li className="flex items-center gap-2">
               <Link
                 href="/"
                 className={`hover:underline flex items-center gap-2 ${
@@ -73,6 +75,10 @@ export default function Header() {
                 <FaHome className="w-5 h-5" />
                 Home
               </Link>
+
+              <Link href="/bookmarks" className=" hover:text-blue-700">
+             <FaBookmark />
+            </Link>
             </li>
           </ul>
         </nav>

@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
-export default function ArticleCard({ article }) {
+
+export default function ArticleCard({ article, saveBookmark, isBookmarked }) {
   return (
     <div className="w-full max-w-3xl p-4 mb-3 bg-white rounded-lg shadow-md relative pt-8">
       {article.pubDate && (
@@ -34,6 +36,18 @@ export default function ArticleCard({ article }) {
       >
         Read more
       </Link>
+
+      <button
+        className="absolute top-2 left-2 p-2"
+        onClick={() => saveBookmark(article)} // Använd saveBookmark-funktionen från props
+      >
+        {isBookmarked(article.article_id) ? (
+          <FaBookmark className="text-blue-500" />
+        ) : (
+          <FaRegBookmark />
+        )}
+      </button>
+
     </div>
   );
 }
